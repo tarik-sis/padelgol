@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h2>Search results</h2>
+<!-- VULN: reflected XSS — `q` rendered unescaped -->
+<p>You searched for: <%- q %></p>
+<% if (error) { %><p class="error">SQL error: <%- error %></p><% } %>
+
+<div class="court-grid">
+<% results.forEach(c => { %>
+  <a class="court-card" href="/courts/<%= c.id %>">
+    <img src="<%= c.image %>" alt="<%= c.name %>">
+    <div class="court-meta">
+      <span class="badge <%= c.sport %>"><%= c.sport %></span>
+      <h3><%= c.name %></h3>
+      <p class="loc"><%= c.location %></p>
+      <p class="price">€<%= c.price %> / hour</p>
+    </div>
+  </a>
+<% }) %>
+</div>
+<% if (results.length === 0) { %><p>No results.</p><% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h2>Messages for <%= who %></h2>
+<form method="get" action="/messages" class="auth-card">
+  <label>View inbox of (any username)<input name="user" value="<%= who %>"></label>
+  <button class="btn ghost">Load</button>
+</form>
+
+<% if (error) { %><p class="error">SQL error: <%- error %></p><% } %>
+<% messages.forEach(m => { %>
+  <div class="review">
+    <strong>From <%= m.from_user %></strong>
+    <span class="muted"><%= m.created_at %></span>
+    <h4><%= m.subject %></h4>
+    <p><%- m.body %></p>
+  </div>
+<% }) %>
+<% if (messages.length === 0) { %><p>No messages.</p><% } %>
+
+<%- include('partials/footer') %>

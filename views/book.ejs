@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+
+<h2>Book — <%= court.name %></h2>
+<form method="post" action="/book/<%= court.id %>" class="auth-card">
+  <label>Date<input type="date" name="slot_date" required></label>
+  <label>Time<input type="time" name="slot_time" required></label>
+  <label>Notes<textarea name="notes" placeholder="Optional notes"></textarea></label>
+  <button class="btn primary">Confirm booking — €<%= court.price %></button>
+</form>
+
+<%- include('partials/footer') %>

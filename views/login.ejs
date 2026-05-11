@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<div class="auth-wrap">
+  <form class="auth-card" method="post" action="/login">
+    <h2>Welcome back</h2>
+    <% if (error) { %><p class="error"><%- error %></p><% } %>
+    <label>Username<input name="username" autofocus></label>
+    <label>Password<input name="password" type="password"></label>
+    <input type="hidden" name="next" value="<%= next %>">
+    <button class="btn primary">Sign in</button>
+    <p class="muted"><a href="/forgot">Forgot password?</a> · <a href="/register">Create account</a></p>
+    <p class="hint">Try: <code>alice / password1</code></p>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

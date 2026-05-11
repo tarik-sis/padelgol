@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Book your paddle &amp; football court in seconds.</h1>
+    <p>Premium courts in Madrid, Barcelona and beyond. Real-time slots, instant confirmation.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="/courts?sport=paddle">Find a paddle court</a>
+      <a class="btn ghost" href="/courts?sport=football">Find a football pitch</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <h3>This week</h3>
+    <ul>
+      <li>1,284 matches booked</li>
+      <li>47 partner clubs</li>
+      <li>4.8 average rating</li>
+    </ul>
+  </div>
+</section>
+
+<section class="featured">
+  <h2>Featured courts</h2>
+  <div class="court-grid">
+    <% courts.forEach(c => { %>
+      <a class="court-card" href="/courts/<%= c.id %>">
+        <img src="<%= c.image %>" alt="<%= c.name %>">
+        <div class="court-meta">
+          <span class="badge <%= c.sport %>"><%= c.sport %></span>
+          <h3><%= c.name %></h3>
+          <p class="loc"><%= c.location %></p>
+          <p class="price">€<%= c.price %> / hour</p>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

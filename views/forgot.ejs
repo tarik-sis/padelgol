@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<div class="auth-wrap">
+  <form class="auth-card" method="post" action="/forgot">
+    <h2>Reset password</h2>
+    <% if (error) { %><p class="error"><%- error %></p><% } %>
+    <% if (step === 'username') { %>
+      <label>Username<input name="username" required></label>
+    <% } else if (step === 'answer') { %>
+      <input type="hidden" name="username" value="<%= data.username %>">
+      <p>Question: <strong><%- data.question %></strong></p>
+      <label>Answer<input name="answer" required></label>
+      <label>New password<input name="new_password" type="password" required></label>
+    <% } %>
+    <button class="btn primary">Continue</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

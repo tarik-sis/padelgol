@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<h2>My bookings</h2>
+<% if (bookings.length === 0) { %><p>You have no bookings yet.</p><% } %>
+<table class="data">
+  <thead><tr><th>#</th><th>Court</th><th>Date</th><th>Time</th><th>Notes</th><th></th></tr></thead>
+  <tbody>
+  <% bookings.forEach(b => { %>
+    <tr>
+      <td><a href="/booking/<%= b.id %>">#<%= b.id %></a></td>
+      <td><%= b.court_name %></td>
+      <td><%= b.slot_date %></td>
+      <td><%= b.slot_time %></td>
+      <!-- VULN: stored XSS — booking notes rendered unescaped -->
+      <td><%- b.notes %></td>
+      <td>
+        <form method="post" action="/booking/<%= b.id %>/cancel" onsubmit="return confirm('Cancel?')">
+          <button class="btn ghost">Cancel</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/footer') %>

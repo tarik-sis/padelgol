@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<h2>Booking #<%= booking.id %></h2>
+<div class="auth-card">
+  <p><strong>Court:</strong> <%= booking.court_name %></p>
+  <p><strong>Date:</strong> <%= booking.slot_date %> at <%= booking.slot_time %></p>
+  <p><strong>Owner:</strong> <%= booking.owner %></p>
+  <p><strong>Notes:</strong> <%- booking.notes %></p>
+  <form method="post" action="/booking/<%= booking.id %>/cancel">
+    <button class="btn ghost">Cancel booking</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

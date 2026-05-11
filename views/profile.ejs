@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<h2>Your profile</h2>
+<div class="profile-grid">
+  <div class="auth-card">
+    <img class="avatar" src="<%= profile.avatar %>" alt="avatar">
+    <form method="post" action="/profile/avatar" enctype="multipart/form-data">
+      <label>Upload new avatar<input type="file" name="avatar"></label>
+      <button class="btn ghost">Upload</button>
+    </form>
+  </div>
+
+  <form method="post" action="/profile" class="auth-card">
+    <label>Username<input name="username" value="<%= profile.username %>"></label>
+    <label>Email<input name="email" value="<%= profile.email || '' %>"></label>
+    <label>Bio (HTML allowed)<textarea name="bio"><%= profile.bio || '' %></textarea></label>
+    <label>Credit card<input name="credit_card" value="<%= profile.credit_card || '' %>"></label>
+    <label>New password<input name="password" type="password"></label>
+    <button class="btn primary">Save</button>
+  </form>
+
+  <div class="auth-card">
+    <h3>About me</h3>
+    <!-- VULN: stored XSS — bio rendered as raw HTML -->
+    <div class="bio"><%- profile.bio || '<em>(no bio yet)</em>' %></div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

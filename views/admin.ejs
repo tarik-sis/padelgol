@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+
+<h2>Admin console</h2>
+<p class="muted">Logged in as <%= user.username %> (role: <%= user.role %>)</p>
+
+<section class="admin-tools auth-card">
+  <h3>Tools</h3>
+  <form method="get" action="/admin/ping">
+    <label>Ping host<input name="host" value="127.0.0.1"></label>
+    <button class="btn ghost">Ping</button>
+  </form>
+  <form method="get" action="/admin/fetch">
+    <label>Fetch URL<input name="url" placeholder="http://example.com"></label>
+    <button class="btn ghost">Fetch</button>
+  </form>
+  <form method="get" action="/admin/logs">
+    <label>Read log file<input name="file" value="access.log"></label>
+    <button class="btn ghost">Read</button>
+  </form>
+  <form method="get" action="/admin/calc">
+    <label>Calculator<input name="expr" value="1+1"></label>
+    <button class="btn ghost">Eval</button>
+  </form>
+</section>
+
+<section>
+  <h3>Users</h3>
+  <table class="data">
+    <thead><tr><th>id</th><th>username</th><th>email</th><th>role</th><th>credit card</th></tr></thead>
+    <tbody>
+    <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.id %></td><td><%= u.username %></td><td><%= u.email %></td>
+        <td><%= u.role %></td><td><%= u.credit_card %></td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h3>All bookings</h3>
+  <table class="data">
+    <thead><tr><th>id</th><th>user_id</th><th>court_id</th><th>date</th><th>time</th></tr></thead>
+    <tbody>
+    <% bookings.forEach(b => { %>
+      <tr><td><%= b.id %></td><td><%= b.user_id %></td><td><%= b.court_id %></td><td><%= b.slot_date %></td><td><%= b.slot_time %></td></tr>
+    <% }) %>
+    </tbody>
+  </table>
+</section>
+
+<%- include('partials/footer') %>

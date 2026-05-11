@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<% if (!court) { %>
+  <p>Court not found.</p>
+<% } else { %>
+<article class="court-detail">
+  <img src="<%= court.image %>" alt="<%= court.name %>">
+  <div>
+    <span class="badge <%= court.sport %>"><%= court.sport %></span>
+    <h1><%= court.name %></h1>
+    <p class="loc"><%= court.location %></p>
+    <p><%= court.description %></p>
+    <p class="price">€<%= court.price %> / hour</p>
+    <% if (user) { %>
+      <a class="btn primary" href="/book/<%= court.id %>">Book this court</a>
+    <% } else { %>
+      <a class="btn primary" href="/login?next=/book/<%= court.id %>">Login to book</a>
+    <% } %>
+  </div>
+</article>
+
+<section class="reviews">
+  <h2>Reviews</h2>
+  <% reviews.forEach(r => { %>
+    <div class="review">
+      <strong><%- r.author %></strong>
+      <span class="muted"><%= r.created_at %></span>
+      <!-- VULN: stored XSS — review content rendered unescaped -->
+      <p><%- r.content %></p>
+    </div>
+  <% }) %>
+
+  <% if (user) { %>
+    <form method="post" action="/courts/<%= court.id %>/review" class="review-form">
+      <textarea name="content" placeholder="Share your experience"></textarea>
+      <button class="btn primary">Post review</button>
+    </form>
+  <% } %>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

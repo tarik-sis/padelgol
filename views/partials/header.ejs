@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PadelGol — Book Paddle & Football Courts</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <span class="brand-mark">P</span><span class="brand-name">PadelGol</span>
+    </a>
+    <nav>
+      <a href="/courts">Courts</a>
+      <a href="/courts?sport=paddle">Paddle</a>
+      <a href="/courts?sport=football">Football</a>
+      <% if (user) { %>
+        <a href="/my-bookings">My bookings</a>
+        <a href="/messages">Messages</a>
+        <a href="/profile"><%= user.username %></a>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register" class="cta">Sign up</a>
+      <% } %>
+    </nav>
+  </div>
+  <form class="search-bar container" action="/search" method="get">
+    <input name="q" placeholder="Search courts, locations…" value="<%= typeof q !== 'undefined' && q ? q : '' %>">
+    <button>Search</button>
+  </form>
+</header>
+<main class="container">
