@@ -24,7 +24,7 @@ const { db, init } = require('./db');
 
 // VULN: hardcoded secret committed in source — Sensitive Data Exposure
 const JWT_SECRET = 'padelgol-super-secret-2025';
-const API_KEY = 'sk_live_padelgol_51XyZabcDEF1234567890';
+const API_KEY = process.env.API_KEY;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
